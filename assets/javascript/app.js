@@ -8,9 +8,17 @@ function createButtons() {
     for(var i = 0; i < topics.length; i++) {
         $("#moodButtons").append("<button type='button' class='btn btn-primary' value='" + topics[i] + "'>" + topics[i] + "</button>");
     }
-}
+};
 
 // adds code to the html form created to create new buttons based on user's search selection
+$("#createMood").on("click", function () {
+    event.preventDefault();
+    var mood = $("#moodText").val().trim();
+    if (mood && (!(topics.includes(mood)))){
+      topics.push(mood);
+      createButtons();
+      }
+  });
 
 // code that pulls Gifs from the GIPHY API based on the value (variable "topics") of the buttons
 $(document).on("click", ".btn", function ()  {
