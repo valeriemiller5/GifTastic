@@ -14,7 +14,7 @@ function createButtons() {
 $("#createMood").on("click", function () {
     event.preventDefault();
     var mood = $("#moodText").val().trim();
-    if (mood && (!(topics.includes(mood)))){
+    if (mood && (!(topics.includes(mood)))){ // this line prevents an existing or created mood button from being repeated
       topics.push(mood);
       createButtons();
       }
@@ -34,15 +34,30 @@ $(document).on("click", ".btn", function ()  {
             var gifDiv = $("<div class='item'>");
             var rating = results[j].rating;
             var p = $("<p>").text("Rating: " + rating);
-            var moodImage = $("<img>");
+            var moodImage = $("<img class='movingImage'>");
             moodImage.attr("src", results[j].images.fixed_height_still.url);
+            moodImage.attr("data-still", results[j].images.fixed_height_still.url);
+            moodImage.attr("data-animate", results[j].images.fixed_height.url);
+            moodImage.attr("data-state", "still");
+            //animalDiv.prependTo($('#gifs'))
             gifDiv.prepend(p);
             gifDiv.prepend(moodImage);
-
-            console.log(response); // used this to check image/animation choices provided in the API
             $(".imageResults").prepend(gifDiv);
+            console.log(response); // used this to check image/animation choices provided in the API
           }
-    })
+    
+          // function that allows user to click on GIFs to make them play and pause
+          $(".movingImage").on("click", function () {
+            var state = $(this).attr("data-state");
+            if(state == "still") {
+                $(this).attr("src", $(this).attr("data-animate"));
+                $(this).attr("data-state", "animate");
+              } else {
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "still");
+              }
+        });
+    });
 });
 
 createButtons();
