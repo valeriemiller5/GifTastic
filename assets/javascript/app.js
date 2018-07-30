@@ -41,7 +41,7 @@ $(document).on("click", ".btn", function ()  {
             moodImage.attr("data-animate", results[j].images.fixed_height.url);
             moodImage.attr("data-state", "still");
             gifDiv.append(p);
-            gifDiv.append(moodImage);
+            gifDiv.prepend(moodImage);
             $("#imageResults").prepend(gifDiv);
             console.log(response); // used this to check image/animation choices provided in the API
           }
