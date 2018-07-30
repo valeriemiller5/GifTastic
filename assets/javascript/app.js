@@ -6,7 +6,7 @@ $(document).ready(function() {
 function createButtons() {
     $("#moodButtons").empty();
     for(var i = 0; i < topics.length; i++) {
-        $("#moodButtons").append("<button type='button' class='btn btn-primary' value='" + topics[i] + "'>" + topics[i] + "</button>");
+        $("#moodButtons").append("<button type='button' class='btn btn-outline-light' value='" + topics[i] + "'>" + topics[i] + "</button>").append(" ");
     }
 };
 
@@ -17,6 +17,7 @@ $("#createMood").on("click", function () {
     if (mood && (!(topics.includes(mood)))){ // this line prevents an existing or created mood button from being repeated
       topics.push(mood);
       createButtons();
+      $("#moodForm input[type='text']").val(""); // clears text field for next mood input
       }
   });
 
@@ -39,10 +40,9 @@ $(document).on("click", ".btn", function ()  {
             moodImage.attr("data-still", results[j].images.fixed_height_still.url);
             moodImage.attr("data-animate", results[j].images.fixed_height.url);
             moodImage.attr("data-state", "still");
-            //animalDiv.prependTo($('#gifs'))
-            gifDiv.prepend(p);
-            gifDiv.prepend(moodImage);
-            $(".imageResults").prepend(gifDiv);
+            gifDiv.append(p);
+            gifDiv.append(moodImage);
+            $("#imageResults").prepend(gifDiv);
             console.log(response); // used this to check image/animation choices provided in the API
           }
     

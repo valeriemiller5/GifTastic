@@ -1,0 +1,18 @@
+body {
+    background-color: rgb(243, 243, 207);
+}
+
+.right {
+    position: absolute;
+    right: 200px;
+}
+
+.left {
+    position: absolute;
+    left: 100px;
+}
+
+.item {
+    float: left;
+    margin-left: 10px;
+}
